@@ -4,11 +4,13 @@ import Cell from './Cell';
 
 export default function Row(props) {
   return (
-    props.row.map((cell: number, index: number) => <Cell 
+    props.row.map((cell, index: number) => <Cell 
       rowIndex={props.rowIndex} 
       cellIndex={index} 
       updateGrid={props.updateGrid} 
-      value={cell}
+      flagCell={props.flagCell}
+      value={cell.status}
+      flagged={cell.flagged}
     />)
   );
 }
