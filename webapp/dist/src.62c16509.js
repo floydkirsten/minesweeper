@@ -28285,7 +28285,61 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../src/components/MineCounter.tsx":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../src/components/MineSquare.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MineSquare = void 0;
+
+var react_1 = __importDefault(require("react"));
+
+function MineSquare(_a) {
+  var name = _a.name,
+      index = _a.index;
+  return react_1.default.createElement("div", {
+    id: "mine"
+  }, name);
+}
+
+exports.MineSquare = MineSquare;
+},{"react":"../node_modules/react/index.js"}],"../src/components/MineField.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MineField = void 0;
+
+var react_1 = __importDefault(require("react"));
+
+var MineSquare_1 = require("./MineSquare");
+
+function MineField(_a) {
+  var grid = _a.grid;
+  return react_1.default.createElement("div", null, grid.map(function (tile) {
+    return react_1.default.createElement(MineSquare_1.MineSquare, {
+      name: tile.name,
+      index: tile.index
+    });
+  }));
+}
+
+exports.MineField = MineField;
+},{"react":"../node_modules/react/index.js","./MineSquare":"../src/components/MineSquare.tsx"}],"../src/components/MineCounter.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -28373,8 +28427,6 @@ function MineMenu() {
     id: 'menu'
   }, react_1.default.createElement(ResetButton_1.ResetButton, {
     onClick: reset
-  }), react_1.default.createElement(ResetButton_1.ResetButton, {
-    onClick: lower
   }), react_1.default.createElement(MineCounter_1.Counter, {
     bombCount: bombCount
   }));
@@ -28397,14 +28449,35 @@ exports.MineGame = void 0;
 
 var react_1 = __importDefault(require("react"));
 
+var MineField_1 = require("./MineField");
+
 var MineMenu_1 = require("./MineMenu");
+/* interface GameProps {
+    size: 8,
+    mines: 10
+}
+*/
+
+
+var grid = [{
+  index: 0,
+  name: "test1"
+}, {
+  index: 2,
+  name: "test2"
+}, {
+  index: 3,
+  name: "test3"
+}];
 
 function MineGame() {
-  return react_1.default.createElement("div", null, react_1.default.createElement(MineMenu_1.MineMenu, null));
+  return react_1.default.createElement("div", null, react_1.default.createElement(MineMenu_1.MineMenu, null), react_1.default.createElement(MineField_1.MineField, {
+    grid: grid
+  }));
 }
 
 exports.MineGame = MineGame;
-},{"react":"../node_modules/react/index.js","./MineMenu":"../src/components/MineMenu.tsx"}],"../src/index.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./MineField":"../src/components/MineField.tsx","./MineMenu":"../src/components/MineMenu.tsx"}],"../src/index.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -28456,7 +28529,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59273" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62678" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

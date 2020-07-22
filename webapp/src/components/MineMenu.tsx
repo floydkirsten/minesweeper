@@ -19,7 +19,6 @@ function MineMenu() {
     return (
         <div id='menu'> 
             <ResetButton onClick={reset}/>
-            <ResetButton onClick={lower}/>
             <Counter bombCount={bombCount}/>  
         </div>
     )

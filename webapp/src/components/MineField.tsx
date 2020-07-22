@@ -1,14 +1,23 @@
 import React from 'react';
 import { MineSquare } from './MineSquare'
 
-function MineField({}) {
+interface FieldProps {
+    grid: []
+}
+
+
+function MineField({grid}: FieldProps) {
+
     return (
-    <div id="board">        
-        <MineSquare />
-        <MineSquare />
-        <MineSquare />
-    </div>
-    );
+        <div>
+            {grid.map(tile => {
+                return (
+                    <MineSquare name={tile.name} index={tile.index} />
+                );
+            })}   
+        </div>
+
+    )
 }
 
 

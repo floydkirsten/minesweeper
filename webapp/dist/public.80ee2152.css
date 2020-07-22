@@ -1,4 +1,4 @@
-.square {
+#tile {
   background: pink;
   height: 100px;
   width: 100px;
@@ -6,8 +6,8 @@
 
 #board {
   background: gray;
-  height: 500px;
-  width: 500px;
+  height: 256px;
+  width: 256px;
 }
 
 #mine {
