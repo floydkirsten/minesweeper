@@ -7,10 +7,12 @@ export default function Row(props) {
     props.row.map((cell, index: number) => <Cell 
       rowIndex={props.rowIndex} 
       cellIndex={index} 
-      updateGrid={props.updateGrid} 
+      handleClick={props.handleClick} 
       flagCell={props.flagCell}
-      value={cell.status}
+      value={cell.value}
+      bomb={cell.bomb}
       flagged={cell.flagged}
+      opened={cell.opened}
     />)
   );
 }

@@ -1,7 +1,7 @@
 #tile {
     background: pink;
-    height: 100px;
-    width: 100px;
+    height: 300px;
+    width: 300px;
 }
 
 #board {
@@ -38,10 +38,12 @@
 
 .cell {
   border: 1px solid black;
-  height: 50px;
-  width: 50px;
+  height: 100px;
+  width: 100px;
+  text-align: center;
 }
 
 .row {
-  display: inline-block;
+    display: inline-block;
+    vertical-align: top
 }

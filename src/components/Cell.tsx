@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default function Cell({ rowIndex, cellIndex, updateGrid, value, flagCell, flagged }) {
+export default function Cell({ rowIndex, cellIndex, handleClick, value, flagCell, flagged, bomb, opened }) {
   return (
-    <div className='cell' onClick={() => updateGrid(rowIndex, cellIndex)} onContextMenu={() => flagCell(rowIndex, cellIndex)} style={{background: flagged ?  'pink' : 'gray'}}>{value}{flagged}</div>
+  <div className='cell' onClick={() => handleClick(rowIndex, cellIndex, false)} onContextMenu={() => flagCell(rowIndex, cellIndex)} style={{background: opened ?  'white' : 'gray'}}>{value}</div>
   );
 }
