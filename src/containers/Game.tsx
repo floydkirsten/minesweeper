@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import Row from '../components/Row';
 import Button from '../components/Button';
 import Counter from '../components/Counter';
+import Level from '../components/LevelSelect'
 
 export default function Game() {
 
-  const [bombsLeft, setBombsLeft] = useState(1);
-  const [size, setSize] = useState(2);
+  const [bombsLeft, setBombsLeft] = useState(5);
+  const [bombsNumber, setBombsNumber] = useState(5);
+  const [size, setSize] = useState(8);
 
   function makeInitGrid(size) {
     var initGrid=new Array(size);
@@ -31,14 +33,16 @@ export default function Game() {
   const [grid, setGrid] = useState(makeInitGrid(size));
     
   function startGame() {
-    for (var i=0;i<bombsLeft;i++) {
-      var bomb=true;
-      while(bomb) {
-        var row = Math.floor(Math.random() * Math.floor(size));
-        var col = Math.floor(Math.random() * Math.floor(size));
+    setGrid(makeInitGrid(size));
+    
+    for (let i=0;i<bombsLeft;i++) {
+      let bombPlaced=false;
+      while(!bombPlaced) {
+        const row = Math.floor(Math.random() * Math.floor(size));
+        const col = Math.floor(Math.random() * Math.floor(size));
         if (grid[row][col].bomb==false) {
           grid[row][col].bomb=true;
-          bomb = false;
+          bombPlaced = true;
         }
       }
     }
@@ -77,7 +81,7 @@ export default function Game() {
         })
       });
       setGrid(newGrid);
-      if (isGameOver()==true) alert("You won!");
+      //if (isGameOver()==true) alert("You won!");
     }
     console.log(grid);
   }
@@ -142,6 +146,7 @@ export default function Game() {
         if (cell.flagged==false && cell.opened==false) gameOver=false; 
       });
     });
+    console.log(gameOver);
     return gameOver;
   }
 
@@ -173,7 +178,7 @@ export default function Game() {
 
   function reset() {
     //start new game
-    setBombsLeft(1);
+    setBombsLeft(bombsNumber);
     const newGrid = grid.map((row, index) => {
       return row.map((cell, index) => {
         cell.flagged=false;
@@ -187,11 +192,29 @@ export default function Game() {
     startGame();
   }
 
+  function setLevel(val) {
+    if (val==1) {
+      setSize(8);
+      setBombsLeft(5);
+      setBombsNumber(5);
+    } else if (val==2) {
+      setSize(16);
+      setBombsLeft(40);
+      setBombsNumber(40);
+    } else {
+      setSize(16);
+      setBombsLeft(40);
+      setBombsNumber(40);
+    }
+    //startGame();
+  }
+
   return (
     <div id='container'>
       <div id="menu">
         <Button onClick={reset}/>
         <Counter flags={bombsLeft}/>
+        <Level onClick={setLevel}/>
       </div>
       <br/>
       {
