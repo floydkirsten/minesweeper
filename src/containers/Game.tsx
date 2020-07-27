@@ -7,7 +7,7 @@ import Counter from '../components/Counter';
 export default function Game() {
 
   const [bombsLeft, setBombsLeft] = useState(1);
-  const [size, setSize] = useState(4);
+  const [size, setSize] = useState(2);
 
   function makeInitGrid(size) {
     var initGrid=new Array(size);
@@ -51,23 +51,18 @@ export default function Game() {
   }
 
   function handleClick(rowIndex: number, cellIndex: number, loop: boolean) {
-    
     if (grid[rowIndex][cellIndex].opened==true) {
-
     } else if(grid[rowIndex][cellIndex].bomb==true && !loop) {
-      grid[rowIndex][cellIndex].opened=true;
       explode();
     } else {
-      grid[rowIndex][cellIndex].opened=true;
       const newGrid = grid.map((row, index) => {
         if (index !== rowIndex) return row;
         return row.map((cell, index) => {
           if (index !== cellIndex) return cell;
           if (cell.adjacentBombs==0) {
+            grid[rowIndex][cellIndex].opened=true;
             if (rowIndex>0 && cellIndex>0) handleClick(rowIndex-1, cellIndex-1, true);
-            if (rowIndex>0) {
-              handleClick(rowIndex-1, cellIndex, true);
-            }
+            if (rowIndex>0) handleClick(rowIndex-1, cellIndex, true);
             if (cellIndex>0) handleClick(rowIndex, cellIndex-1, true);
             if (rowIndex<grid.length-1) handleClick(rowIndex+1, cellIndex, true);
             if (cellIndex<grid.length-1) handleClick(rowIndex, cellIndex+1, true);
@@ -75,16 +70,16 @@ export default function Game() {
             if (rowIndex>0 && cellIndex<grid.length-1) handleClick(rowIndex-1, cellIndex+1, true);
             if (rowIndex<grid.length-1 && cellIndex>0) handleClick(rowIndex+1, cellIndex-1, true);
           } else {
+            grid[rowIndex][cellIndex].opened=true;
             cell.value=cell.adjacentBombs.toString();
           }
           return cell;
         })
       });
       setGrid(newGrid);
-      //update cell
-      //call adjacents (not flagged or open)
-      //if(isGameOver()==true) alert("You won!");
+      if (isGameOver()==true) alert("You won!");
     }
+    console.log(grid);
   }
 
   function explode() {
@@ -144,7 +139,7 @@ export default function Game() {
     var gameOver=true;
     grid.map((row, index) => {
       row.map((cell, index) => {
-        if (!(cell.flagged==true || cell.opened==true)) gameOver=false; 
+        if (cell.flagged==false && cell.opened==false) gameOver=false; 
       });
     });
     return gameOver;
@@ -168,15 +163,12 @@ export default function Game() {
           cell.value="FLAG";
           cell.flagged = !cell.flagged;
           }
-          
         }
         return cell;
       });
     });
-
     setGrid(newGrid);
-    //if (isGameOver()==true) alert("you won!");
-    console.log(bombsLeft);
+    if (isGameOver()==true) alert("you won!");
   }
 
   function reset() {
