@@ -97,6 +97,7 @@ export default function Game() {
   function detectShift(rowIndex, cellIndex, e) {
     if (active === false) return;
     if (e.shiftKey) {
+      e.preventDefault();
       flagCell(rowIndex, cellIndex);
     } else {
       handleClick(rowIndex, cellIndex);
