@@ -1,7 +1,15 @@
 import React from 'react';
 
-export default function Cell({ rowIndex, cellIndex, detectShift, value, opened }) {
+const colors = ["black", "blue", "green", "red", "darkBlue"];
+
+export default function Cell({ rowIndex, cellIndex, detectShift, value, opened, adjacentBombs }) {
   return (
-  <div className='cell' onClick={() => detectShift(rowIndex, cellIndex, event)} style={{background: opened ?  'white' : 'gray'}}>{value}</div>
+  <div 
+  className='cell' 
+  onClick={() => detectShift(rowIndex, cellIndex, event)} 
+  style={{background: opened ?  'whitesmoke' : 'darkgray', color: colors[adjacentBombs]}}
+  >
+    {value}
+  </div>
   );
 }

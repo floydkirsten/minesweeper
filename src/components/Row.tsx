@@ -12,6 +12,7 @@ export default function Row(props) {
         detectShift={props.detectShift}
         value={cell.value}
         opened={cell.opened}
+        adjacentBombs={cell.adjacentBombs}
       />
     ))
   );

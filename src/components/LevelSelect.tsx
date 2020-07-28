@@ -3,8 +3,8 @@ import React from 'react';
 
 export default function Level({ onClick }) {
   return (
-    <div>
-      <div>
+    <div id="level">
+      <div style={{color: "lightgray"}}>
         Select Level:
       </div>
       <button onClick={() => onClick(1)}> easy </button>

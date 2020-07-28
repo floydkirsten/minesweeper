@@ -10,7 +10,7 @@ import LevelSelect from '../components/LevelSelect';
 
 import minesweeper from '../utils/minesweeper';
 
-const { makeInitGrid, placeBombsOnGrid, calcAdjacentBombValues, calcOpenCell, difficultyValues } = minesweeper;
+const { checkIfGameOver, calcOpenCell, difficultyValues, prepareGrid } = minesweeper;
 
 export default function Game() {
   const [bombsLeft, setBombsLeft] = useState(5);
@@ -19,13 +19,6 @@ export default function Game() {
   const [difficulty, setDifficulty] = useState(1);
   const [grid, setGrid] = useState(null);
   const [active, setActive] = useState(true);
-
-  function prepareGrid(size: number, bombCount: number) {
-    const initializedGrid = makeInitGrid(size);
-    const bombedGrid = placeBombsOnGrid(initializedGrid, bombCount);
-    const preparedGrid = calcAdjacentBombValues(bombedGrid);
-    return preparedGrid;
-  }
 
   function startGame() {
     const { size, bombCount } = find(difficultyValues, ['difficulty', difficulty]);
@@ -39,10 +32,9 @@ export default function Game() {
 
   function exposeGrid() {
     const newGrid = grid.map((row) => row.map((cell) => {
-      //const cellClone = { ...cell };
       cell.opened = true;
       if (cell.bomb === true) {
-        cell.value = 'BOMB!';
+        cell.value = '💣';
       } else if (cell.adjacentBombs === 0) {
         cell.value = '';
       } else {
@@ -54,17 +46,6 @@ export default function Game() {
     setGrid(newGrid);
   }
 
-  function checkIfGameOver() {
-    let over = true;
-    grid.map((row, index) => {
-      row.map((cell, index) => {
-        if (cell.flagged===false && cell.opened===false) over = false;  
-      });
-    });
-    if (over) setActive(false);
-    return over;
-  }
-
   function gameOver() {
     exposeGrid();
     alert('You suck!');
@@ -74,14 +55,16 @@ export default function Game() {
     if (grid[rowIndex][cellIndex].bomb===true) gameOver();
     if(grid[rowIndex][cellIndex].opened===true) return;
     
-    let newGrid = calcOpenCell(rowIndex, cellIndex, grid);
+    let newGrid = calcOpenCell(rowIndex, cellIndex, grid, false);
 
     setGrid(newGrid);
 
-    if (checkIfGameOver()==true) alert("You won!");
+    if (checkIfGameOver(grid)==true) {
+      setActive(false)
+      alert("you won!")
+    }
   }
   
-
   function flagCell(rowIndex: number, cellIndex: number) {
      // flag cell, bombcount down
      const newGrid = grid.map((row, index) => {
@@ -98,14 +81,14 @@ export default function Game() {
            return cell;
          } else {
            setBombsLeft(bombsLeft - 1);
-           cell.value = 'FLAG';
+           cell.value = '🚩';
            cell.flagged = true;
         }
          return cell;
        });
      });
      setGrid(newGrid);
-     if (checkIfGameOver() === true) alert('you won!');
+     if (checkIfGameOver(grid) === true) alert('you won!');
   }
 
   function detectShift(rowIndex, cellIndex, e) {

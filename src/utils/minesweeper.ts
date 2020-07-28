@@ -75,6 +75,13 @@ function placeBombsOnGrid(grid, bombsLeft: number) {
   return gridClone;
 }
 
+function prepareGrid(size: number, bombCount: number) {
+  const initializedGrid = makeInitGrid(size);
+  const bombedGrid = placeBombsOnGrid(initializedGrid, bombCount);
+  const preparedGrid = calcAdjacentBombValues(bombedGrid);
+  return preparedGrid;
+}
+
 function calcAdjacentBombValues(grid) {
   const gridClone = cloneDeep(grid);
 
@@ -121,6 +128,16 @@ function calcOpenCell(rowIndex: number, cellIndex: number, grid, loop) {
 }
 }
 
+function checkIfGameOver(grid) {
+  let over = true;
+  grid.map((row, index) => {
+    row.map((cell, index) => {
+      if (cell.flagged===false && cell.opened===false) over = false;  
+    });
+  });
+  return over;
+}
+
 const difficultyValues = [{
   difficulty: 1,
   bombCount: 5,
@@ -136,10 +153,8 @@ const difficultyValues = [{
 }];
 
 export default {
-  makeInitGrid,
-  checkAdjacentCells,
-  placeBombsOnGrid,
-  calcAdjacentBombValues,
   calcOpenCell,
-  difficultyValues
+  difficultyValues,
+  prepareGrid,
+  checkIfGameOver
 };
