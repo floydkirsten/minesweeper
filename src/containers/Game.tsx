@@ -34,7 +34,7 @@ export default function Game() {
     
   function startGame() {
     setGrid(makeInitGrid(size));
-    
+
     for (let i=0;i<bombsLeft;i++) {
       let bombPlaced=false;
       while(!bombPlaced) {
@@ -136,7 +136,7 @@ export default function Game() {
       }
       grid[row][cell].adjacentBombs=bombCount;
     }
-  
+
   }
 
   function isGameOver() {
