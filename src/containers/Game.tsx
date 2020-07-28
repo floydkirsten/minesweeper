@@ -88,7 +88,10 @@ export default function Game() {
        });
      });
      setGrid(newGrid);
-     if (checkIfGameOver(grid) === true) alert('you won!');
+     if (checkIfGameOver(grid) === true) {
+       setActive(false);
+       alert('you won!');
+     }
   }
 
   function detectShift(rowIndex, cellIndex, e) {
