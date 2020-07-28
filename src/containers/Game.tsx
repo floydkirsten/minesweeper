@@ -10,35 +10,7 @@ import LevelSelect from '../components/LevelSelect';
 
 import minesweeper from '../utils/minesweeper';
 
-const { makeInitGrid, placeBombsOnGrid, calcAdjacentBombValues } = minesweeper;
-
-function calcOpenCell(rowIndex: number, cellIndex: number, grid) {
-
-  const newGrid = grid.map((row, index) => {
-    if (index !== rowIndex) return row;
-    return row.map((cell, index) => {
-      if (index !== cellIndex) return cell;
-      if (cell.bomb===true) return cell;
-      if (cell.adjacentBombs==0) {
-        grid[rowIndex][cellIndex].opened=true;
-        if (rowIndex>0 && cellIndex>0) calcOpenCell(rowIndex-1, cellIndex-1, grid);
-        if (rowIndex>0) calcOpenCell(rowIndex-1, cellIndex, grid);
-        if (cellIndex>0) calcOpenCell(rowIndex, cellIndex-1, grid);
-        if (rowIndex<grid.length-1) calcOpenCell(rowIndex+1, cellIndex, grid);
-        if (cellIndex<grid.length-1) calcOpenCell(rowIndex, cellIndex+1, grid);
-        if (rowIndex<grid.length-1 && cellIndex<grid.length-1) calcOpenCell(rowIndex+1, cellIndex+1, grid);            
-        if (rowIndex>0 && cellIndex<grid.length-1) calcOpenCell(rowIndex-1, cellIndex+1, grid);
-        if (rowIndex<grid.length-1 && cellIndex>0) calcOpenCell(rowIndex+1, cellIndex-1, grid);
-      } else {
-        grid[rowIndex][cellIndex].opened=true;
-        cell.value=cell.adjacentBombs.toString();
-      }
-      return cell;
-    })
-  });
-  
-  return newGrid;
-}
+const { makeInitGrid, placeBombsOnGrid, calcAdjacentBombValues, calcOpenCell, difficultyValues } = minesweeper;
 
 export default function Game() {
   const [bombsLeft, setBombsLeft] = useState(5);
@@ -46,20 +18,7 @@ export default function Game() {
   const [gridSize, setGridSize] = useState(8);
   const [difficulty, setDifficulty] = useState(1);
   const [grid, setGrid] = useState(null);
-
-  const difficultyValues = [{
-    difficulty: 1,
-    bombCount: 5,
-    size: 8,
-  }, {
-    difficulty: 2,
-    bombCount: 20,
-    size: 12,
-  }, {
-    difficulty: 3,
-    bombCount: 40,
-    size: 16,
-  }];
+  const [active, setActive] = useState(true);
 
   function prepareGrid(size: number, bombCount: number) {
     const initializedGrid = makeInitGrid(size);
@@ -75,22 +34,23 @@ export default function Game() {
     setBombsLeft(bombCount);
     setBombsNumber(bombCount);
     setGrid(prepareGrid(size, bombCount));
+    setActive(true);
   }
 
   function exposeGrid() {
     const newGrid = grid.map((row) => row.map((cell) => {
-      const cellClone = { ...cell };
-      cellClone.opened = true;
+      //const cellClone = { ...cell };
+      cell.opened = true;
       if (cell.bomb === true) {
-        cellClone.value = 'BOMB!';
+        cell.value = 'BOMB!';
       } else if (cell.adjacentBombs === 0) {
-        cellClone.value = '';
+        cell.value = '';
       } else {
-        cellClone.value = cell.adjacentBombs.toString();
+        cell.value = cell.adjacentBombs.toString();
       }
-      return cellClone;
+      return cell;
     }));
-
+    setActive(false);
     setGrid(newGrid);
   }
 
@@ -101,8 +61,8 @@ export default function Game() {
         if (cell.flagged===false && cell.opened===false) over = false;  
       });
     });
-    
-    return over;;
+    if (over) setActive(false);
+    return over;
   }
 
   function gameOver() {
@@ -111,43 +71,16 @@ export default function Game() {
   }
 
   function handleClick(rowIndex: number, cellIndex: number) {
+    if (grid[rowIndex][cellIndex].bomb===true) gameOver();
+    if(grid[rowIndex][cellIndex].opened===true) return;
+    
+    let newGrid = calcOpenCell(rowIndex, cellIndex, grid);
 
-    if (grid[rowIndex][cellIndex].opened==true) return;
-    if (grid[rowIndex][cellIndex].bomb==true) gameOver();
-    else {
-      //const newGrid = calcOpenCell(rowIndex, cellIndex, grid);
-      
-      const newGrid = grid.map((row, index) => {
-        if (index !== rowIndex) return row;
-        return row.map((cell, index) => {
-          if (index !== cellIndex) return cell;
-          if (cell.bomb===true) return cell;
-          if (cell.adjacentBombs==0) {
-            cell.opened=true;
-            if (rowIndex>0 && cellIndex>0) handleClick(rowIndex-1, cellIndex-1, grid);
-            if (rowIndex>0) handleClick(rowIndex-1, cellIndex, grid);
-            if (cellIndex>0) handleClick(rowIndex, cellIndex-1, grid);
-            if (rowIndex<grid.length-1) handleClick(rowIndex+1, cellIndex, grid);
-            if (cellIndex<grid.length-1) handleClick(rowIndex, cellIndex+1, grid);
-            if (rowIndex<grid.length-1 && cellIndex<grid.length-1) handleClick(rowIndex+1, cellIndex+1, grid);            
-            if (rowIndex>0 && cellIndex<grid.length-1) handleClick(rowIndex-1, cellIndex+1, grid);
-            if (rowIndex<grid.length-1 && cellIndex>0) handleClick(rowIndex+1, cellIndex-1, grid);
-          } else {
-            cell.opened=true;
-            cell.value=cell.adjacentBombs.toString();
-          }
-          return cell;
-        })
-      });
-      
+    setGrid(newGrid);
 
-      setGrid(newGrid);
-
-      //if (checkIfGameOver()==true) alert("You won!");
-    }
-
+    if (checkIfGameOver()==true) alert("You won!");
   }
-
+  
 
   function flagCell(rowIndex: number, cellIndex: number) {
      // flag cell, bombcount down
@@ -176,6 +109,7 @@ export default function Game() {
   }
 
   function detectShift(rowIndex, cellIndex, e) {
+    if (active === false) return;
     if (e.shiftKey) {
       flagCell(rowIndex, cellIndex);
     } else {

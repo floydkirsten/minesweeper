@@ -87,9 +87,59 @@ function calcAdjacentBombValues(grid) {
   return gridClone;
 }
 
+function calcOpenCell(rowIndex: number, cellIndex: number, grid, loop) {
+  if (grid[rowIndex][cellIndex].bomb===true && !loop) gameOver();
+    if (grid[rowIndex][cellIndex].opened===true) return;
+
+    else {
+      const newGrid = grid.map((row, index) => {
+        if (index !== rowIndex) return row;
+        return row.map((cell, index) => {
+          if (index !== cellIndex) return cell;
+          if (cell.bomb===true) return cell;
+
+          if (cell.adjacentBombs===0) {
+            cell.opened=true;
+            if (rowIndex>0 && cellIndex>0) calcOpenCell(rowIndex-1, cellIndex-1, grid, true); //NW
+            if (rowIndex>0) calcOpenCell(rowIndex-1, cellIndex, grid, true); //W
+            if (cellIndex>0) calcOpenCell(rowIndex, cellIndex-1, grid, true); //N
+            if (rowIndex<grid.length-1) calcOpenCell(rowIndex+1, cellIndex, grid, true); //E
+            if (cellIndex<grid.length-1) if (cellIndex<grid.length-1) calcOpenCell(rowIndex, cellIndex+1, grid, true); //S
+            if (rowIndex<grid.length-1 && cellIndex<grid.length-1) calcOpenCell(rowIndex+1, cellIndex+1, grid, true) //SE           
+            if (rowIndex>0 && cellIndex<grid.length-1) calcOpenCell(rowIndex-1, cellIndex+1, grid, true); //NW
+            if (rowIndex<grid.length-1 && cellIndex>0) calcOpenCell(rowIndex+1, cellIndex-1, grid, true); //NE
+          } else {
+            cell.opened=true;
+            cell.value=cell.adjacentBombs.toString();
+          } 
+          //console.log("hey")
+          return cell;
+        });
+      });
+
+  return newGrid;
+}
+}
+
+const difficultyValues = [{
+  difficulty: 1,
+  bombCount: 5,
+  size: 8,
+}, {
+  difficulty: 2,
+  bombCount: 20,
+  size: 12,
+}, {
+  difficulty: 3,
+  bombCount: 40,
+  size: 16,
+}];
+
 export default {
   makeInitGrid,
   checkAdjacentCells,
   placeBombsOnGrid,
   calcAdjacentBombValues,
+  calcOpenCell,
+  difficultyValues
 };
