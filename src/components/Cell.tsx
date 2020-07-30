@@ -1,6 +1,6 @@
 import React from 'react';
 
-const colors = ["black", "blue", "green", "red", "darkBlue", "darkRed", "turquoise", "black", "gray"];
+const colors = ["black", "palevioletred", "red", "purple", "tan", "darkorchid", "turquoise", "black", "gray"];
 
 export default function Cell({rowIndex, cellIndex, detectShift, value, opened, adjacentBombs}) {
   return (

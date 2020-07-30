@@ -4,12 +4,14 @@ import React from 'react';
 export default function Level({ onClick }:any) {
   return (
     <div id="level">
-      <div style={{color: "lightgray"}}>
+      <div style={{color: "lightgray", paddingBottom: 5}}>
         Select Level:
       </div>
-      <button onClick={() => onClick(1)}> easy </button>
-      <button onClick={() => onClick(2)}> medium </button>
-      <button onClick={() => onClick(3)}> hard </button>
+      <div id="buttons">
+        <button onClick={() => onClick(1)}> easy </button>   
+        <button onClick={() => onClick(2)}> medium </button>
+        <button onClick={() => onClick(3)}> hard </button>
+      </div>
     </div>
 
   );
