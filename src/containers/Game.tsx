@@ -7,6 +7,8 @@ import Row from '../components/Row';
 import Button from '../components/Button';
 import Counter from '../components/Counter';
 import LevelSelect from '../components/LevelSelect';
+import Title from '../components/Title';
+import Rules from '../components/Rules';
 
 import minesweeper from '../utils/minesweeper';
 
@@ -107,6 +109,7 @@ export default function Game() {
 
   return (
     <div id="container">
+      <Title />
       <div id="menu">
         <Button onClick={startGame} />
         <Counter flags={bombsLeft} />
@@ -120,6 +123,7 @@ export default function Game() {
           </div>
         ))
       }
+      <Rules />
     </div>
   );
 }
