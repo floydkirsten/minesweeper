@@ -44,4 +44,4 @@ var n,t=arguments[3],r=require("buffer").Buffer;(function(){var r,e=200,u="Unsup
 },{"react":"n8MK","lodash":"B1iE","../components/Row":"Bb3U","../components/Button":"nvGD","../components/Counter":"zvkm","../components/LevelSelect":"Q69Y","../utils/minesweeper":"eYIG"}],"wGC4":[function(require,module,exports) {
 "use strict";var e=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(exports,"__esModule",{value:!0});var t=e(require("react")),r=require("react-dom"),u=e(require("./containers/Game")),n=function(){return t.default.createElement(u.default,null)};r.render(t.default.createElement(n,null),document.getElementById("root"));
 },{"react":"n8MK","react-dom":"NKHc","./containers/Game":"pe7j"}]},{},["wGC4"], null)
-//# sourceMappingURL=/src.4491a0ae.js.map
+//# sourceMappingURL=src.4491a0ae.js.map
