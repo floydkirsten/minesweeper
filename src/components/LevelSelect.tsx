@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 
-export default function Level({ onClick }) {
+export default function Level({ onClick }:any) {
   return (
     <div id="level">
       <div style={{color: "lightgray"}}>
