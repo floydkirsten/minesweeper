@@ -47491,7 +47491,7 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../node_modules/buffer/index.js"}],"../src/components/Cell.tsx":[function(require,module,exports) {
+},{"buffer":"../node_modules/buffer/index.js"}],"../src/components/Button.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -47506,7 +47506,100 @@ Object.defineProperty(exports, "__esModule", {
 
 var react_1 = __importDefault(require("react"));
 
-var colors = ["black", "blue", "green", "red", "darkBlue", "darkRed", "turquoise", "black", "gray"];
+function Button(_a) {
+  var onClick = _a.onClick;
+  return react_1.default.createElement("button", {
+    onClick: onClick,
+    style: {
+      width: 60,
+      fontSize: 15
+    }
+  }, " reset ");
+}
+
+exports.default = Button;
+},{"react":"../node_modules/react/index.js"}],"../src/components/Counter.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importDefault(require("react"));
+
+function Button(_a) {
+  var flags = _a.flags;
+  return react_1.default.createElement("div", {
+    id: "counter"
+  }, " ", flags, " ");
+}
+
+exports.default = Button;
+},{"react":"../node_modules/react/index.js"}],"../src/components/LevelSelect.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* eslint-disable react/jsx-filename-extension */
+
+var react_1 = __importDefault(require("react"));
+
+function Level(_a) {
+  var _onClick = _a.onClick;
+  return react_1.default.createElement("div", {
+    id: "level"
+  }, react_1.default.createElement("div", {
+    style: {
+      color: "lightgray",
+      paddingBottom: 5
+    }
+  }, "Select Level:"), react_1.default.createElement("div", {
+    id: "buttons"
+  }, react_1.default.createElement("button", {
+    onClick: function onClick() {
+      return _onClick(1);
+    }
+  }, " easy "), react_1.default.createElement("button", {
+    onClick: function onClick() {
+      return _onClick(2);
+    }
+  }, " medium "), react_1.default.createElement("button", {
+    onClick: function onClick() {
+      return _onClick(3);
+    }
+  }, " hard ")));
+}
+
+exports.default = Level;
+},{"react":"../node_modules/react/index.js"}],"../src/components/Cell.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importDefault(require("react"));
+
+var colors = ["black", "palevioletred", "red", "purple", "tan", "darkorchid", "turquoise", "black", "gray"];
 
 function Cell(_a) {
   var rowIndex = _a.rowIndex,
@@ -47560,7 +47653,7 @@ function Row(props) {
 }
 
 exports.default = Row;
-},{"react":"../node_modules/react/index.js","./Cell":"../src/components/Cell.tsx"}],"../src/components/Button.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Cell":"../src/components/Cell.tsx"}],"../src/components/Rules.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -47575,18 +47668,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var react_1 = __importDefault(require("react"));
 
-function Button(_a) {
-  var onClick = _a.onClick;
-  return react_1.default.createElement("button", {
-    onClick: onClick,
-    style: {
-      width: 60
-    }
-  }, " reset ");
+function Rules() {
+  return react_1.default.createElement("div", null, react_1.default.createElement("div", {
+    id: "rules"
+  }, "to set flags: hold down shift and click"));
 }
 
-exports.default = Button;
-},{"react":"../node_modules/react/index.js"}],"../src/components/Counter.tsx":[function(require,module,exports) {
+exports.default = Rules;
+},{"react":"../node_modules/react/index.js"}],"../src/components/Timer.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -47601,54 +47690,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var react_1 = __importDefault(require("react"));
 
-function Button(_a) {
-  var flags = _a.flags;
+function Timer(_a) {
+  var time = _a.time;
   return react_1.default.createElement("div", {
-    id: "counter"
-  }, " ", flags, " ");
+    id: "timer"
+  }, react_1.default.createElement("div", null, " ", time, " "));
 }
 
-exports.default = Button;
-},{"react":"../node_modules/react/index.js"}],"../src/components/LevelSelect.tsx":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/* eslint-disable react/jsx-filename-extension */
-
-var react_1 = __importDefault(require("react"));
-
-function Level(_a) {
-  var _onClick = _a.onClick;
-  return react_1.default.createElement("div", {
-    id: "level"
-  }, react_1.default.createElement("div", {
-    style: {
-      color: "lightgray"
-    }
-  }, "Select Level:"), react_1.default.createElement("button", {
-    onClick: function onClick() {
-      return _onClick(1);
-    }
-  }, " easy "), react_1.default.createElement("button", {
-    onClick: function onClick() {
-      return _onClick(2);
-    }
-  }, " medium "), react_1.default.createElement("button", {
-    onClick: function onClick() {
-      return _onClick(3);
-    }
-  }, " hard "));
-}
-
-exports.default = Level;
+exports.default = Timer;
 },{"react":"../node_modules/react/index.js"}],"../src/components/Title.tsx":[function(require,module,exports) {
 "use strict";
 
@@ -47675,28 +47724,6 @@ function Title() {
 }
 
 exports.default = Title;
-},{"react":"../node_modules/react/index.js"}],"../src/components/Rules.tsx":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var react_1 = __importDefault(require("react"));
-
-function Rules() {
-  return react_1.default.createElement("div", null, react_1.default.createElement("div", {
-    id: "rules"
-  }, "to set flags: hold down shift and click"));
-}
-
-exports.default = Rules;
 },{"react":"../node_modules/react/index.js"}],"../src/utils/minesweeper.ts":[function(require,module,exports) {
 "use strict";
 
@@ -47926,17 +47953,19 @@ var react_1 = __importStar(require("react"));
 
 var lodash_1 = require("lodash");
 
-var Row_1 = __importDefault(require("../components/Row"));
-
 var Button_1 = __importDefault(require("../components/Button"));
 
 var Counter_1 = __importDefault(require("../components/Counter"));
 
 var LevelSelect_1 = __importDefault(require("../components/LevelSelect"));
 
-var Title_1 = __importDefault(require("../components/Title"));
+var Row_1 = __importDefault(require("../components/Row"));
 
 var Rules_1 = __importDefault(require("../components/Rules"));
+
+var Timer_1 = __importDefault(require("../components/Timer"));
+
+var Title_1 = __importDefault(require("../components/Title"));
 
 var minesweeper_1 = __importDefault(require("../utils/minesweeper"));
 
@@ -47970,6 +47999,18 @@ function Game() {
       active = _f[0],
       setActive = _f[1];
 
+  var _g = react_1.useState(0),
+      time = _g[0],
+      setTime = _g[1];
+
+  var _h = react_1.useState(1),
+      clicks = _h[0],
+      setClicks = _h[1];
+
+  var _j = react_1.useState(false),
+      timerActive = _j[0],
+      setTimerActive = _j[1];
+
   function startGame() {
     var _a = lodash_1.find(difficultyValues, ['difficulty', difficulty]),
         size = _a.size,
@@ -47980,6 +48021,9 @@ function Game() {
     setBombsNumber(bombCount);
     setGrid(prepareGrid(size, bombCount));
     setActive(true);
+    setTime(0);
+    setClicks(1);
+    setTimerActive(false);
   }
 
   function exposeGrid() {
@@ -47988,7 +48032,7 @@ function Game() {
         cell.opened = true;
 
         if (cell.bomb === true) {
-          cell.value = '💣';
+          cell.value = '😵';
         } else if (cell.adjacentBombs === 0) {
           cell.value = '';
         } else {
@@ -47999,6 +48043,7 @@ function Game() {
       });
     });
     setActive(false);
+    setTimerActive(false);
     setGrid(newGrid);
   }
 
@@ -48008,6 +48053,12 @@ function Game() {
   }
 
   function handleClick(rowIndex, cellIndex) {
+    console.log(clicks);
+
+    if (clicks === 1) {
+      setTimerActive(true);
+    }
+
     if (grid[rowIndex][cellIndex].bomb === true) gameOver();
     if (grid[rowIndex][cellIndex].opened === true) return;
     var newGrid = calcOpenCell(rowIndex, cellIndex, grid, false);
@@ -48015,6 +48066,7 @@ function Game() {
 
     if (checkIfGameOver(grid) == true) {
       setActive(false);
+      setTimerActive(false);
       alert("you won!");
     }
   }
@@ -48034,7 +48086,7 @@ function Game() {
           return cell;
         } else {
           setBombsLeft(bombsLeft - 1);
-          cell.value = '🚩';
+          cell.value = '❕';
           cell.flagged = true;
         }
 
@@ -48045,9 +48097,28 @@ function Game() {
 
     if (checkIfGameOver(grid) === true) {
       setActive(false);
+      setTimerActive(false);
       alert('you won!');
     }
   }
+
+  react_1.useEffect(function () {
+    var interval = null;
+
+    if (timerActive) {
+      interval = setInterval(function () {
+        setTime(function (time) {
+          return time + 1;
+        });
+      }, 1000);
+    } else if (!timerActive) {
+      clearInterval(interval);
+    }
+
+    return function () {
+      return clearInterval(interval);
+    };
+  }, [timerActive, time]);
 
   function detectShift(rowIndex, cellIndex, e) {
     if (active === false) return;
@@ -48056,6 +48127,7 @@ function Game() {
       e.preventDefault();
       flagCell(rowIndex, cellIndex);
     } else {
+      setClicks(clicks + 1);
       handleClick(rowIndex, cellIndex);
     }
   }
@@ -48065,7 +48137,9 @@ function Game() {
     id: "container"
   }, react_1.default.createElement(Title_1.default, null), react_1.default.createElement("div", {
     id: "menu"
-  }, react_1.default.createElement(Button_1.default, {
+  }, react_1.default.createElement(Timer_1.default, {
+    time: time
+  }), react_1.default.createElement(Button_1.default, {
     onClick: startGame
   }), react_1.default.createElement(Counter_1.default, {
     flags: bombsLeft
@@ -48083,7 +48157,7 @@ function Game() {
 }
 
 exports.default = Game;
-},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","../components/Row":"../src/components/Row.tsx","../components/Button":"../src/components/Button.tsx","../components/Counter":"../src/components/Counter.tsx","../components/LevelSelect":"../src/components/LevelSelect.tsx","../components/Title":"../src/components/Title.tsx","../components/Rules":"../src/components/Rules.tsx","../utils/minesweeper":"../src/utils/minesweeper.ts"}],"../src/index.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","../components/Button":"../src/components/Button.tsx","../components/Counter":"../src/components/Counter.tsx","../components/LevelSelect":"../src/components/LevelSelect.tsx","../components/Row":"../src/components/Row.tsx","../components/Rules":"../src/components/Rules.tsx","../components/Timer":"../src/components/Timer.tsx","../components/Title":"../src/components/Title.tsx","../utils/minesweeper":"../src/utils/minesweeper.ts"}],"../src/index.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -48135,7 +48209,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60551" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64506" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
