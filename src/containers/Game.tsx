@@ -53,7 +53,7 @@ export default function Game() {
 
   function handleClick(rowIndex: number, cellIndex: number) {
     if (grid[rowIndex][cellIndex].bomb===true) gameOver();
-    if(grid[rowIndex][cellIndex].opened===true) return;
+    if (grid[rowIndex][cellIndex].opened===true) return;
     
     let newGrid = calcOpenCell(rowIndex, cellIndex, grid, false);
 
@@ -66,7 +66,6 @@ export default function Game() {
   }
   
   function flagCell(rowIndex: number, cellIndex: number) {
-     // flag cell, bombcount down
      const newGrid = grid.map((row, index) => {
        if (index !== rowIndex) return row;
        return row.map((cell, index) => {

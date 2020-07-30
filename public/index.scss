@@ -41,10 +41,18 @@
 }
 
 .cell {
-  border: 1px solid black;
-  height: 50px;
-  width: 50px;
-  text-align: center;
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;      
 }
 
 .row {
@@ -63,4 +71,19 @@ body {
 
 #level {
     padding-left: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+}
+
+button {
+    transition-duration: 0.4s;
+    
+    
+}
+      
+button:hover {
+    background-color: lightslategray; /* Green */
+    color: white;
 }

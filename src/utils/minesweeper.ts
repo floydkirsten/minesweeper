@@ -119,7 +119,6 @@ function calcOpenCell(rowIndex: number, cellIndex: number, grid, loop) {
             cell.opened=true;
             cell.value=cell.adjacentBombs.toString();
           } 
-          //console.log("hey")
           return cell;
         });
       });
