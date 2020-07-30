@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel public/index.html --out-dir docs",
+    "start": "parcel serve public/index.html",
     "lint": "eslint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build": "parcel build public/index.html --out-dir docs --public-url ./"
+    "deploy": "gh-pages -d dist",
+    "build": "cross-env NODE_ENV=production parcel build public/index.html --public-url ."
   },
   "keywords": [],
   "homepage": "http://floydkirsten.github.io/minesweeper",
@@ -35,6 +34,7 @@
     "@types/lodash": "^4.14.158",
     "chance": "^1.1.6",
     "components": "^0.1.0",
+    "cross-env": "^7.0.2",
     "lodash": "^4.17.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
