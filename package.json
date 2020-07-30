@@ -7,7 +7,7 @@
     "start": "parcel serve public/index.html",
     "lint": "eslint",
     "deploy": "gh-pages -d dist",
-    "build": "cross-env NODE_ENV=production parcel build public/index.html --public-url ."
+    "build": "parcel build public/index.html --public-url ."
   },
   "keywords": [],
   "homepage": "http://floydkirsten.github.io/minesweeper",
