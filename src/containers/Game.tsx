@@ -43,7 +43,7 @@ export default function Game() {
     const newGrid = grid.map((row) => row.map((cell) => {
       cell.opened = true;
       if (cell.bomb === true) {
-        cell.value = '😵';
+        cell.value = '😔';
       } else if (cell.adjacentBombs === 0) {
         cell.value = '';
       } else {
@@ -95,7 +95,7 @@ export default function Game() {
            return cell;
          } else {
            setBombsLeft(bombsLeft - 1);
-           cell.value = '❕';
+           cell.value = '🌸';
            cell.flagged = true;
         }
          return cell;
@@ -144,6 +144,7 @@ export default function Game() {
         <LevelSelect onClick={setDifficulty} />
       </div>
       <br />
+      <div id="board">
       {
         grid && grid.map((row:number, index:number) => (
           <div className="row">
@@ -151,6 +152,7 @@ export default function Game() {
           </div>
         ))
       }
+      </div>
       <Rules />
     </div>
   );

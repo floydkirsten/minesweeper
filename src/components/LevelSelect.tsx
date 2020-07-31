@@ -4,7 +4,7 @@ import React from 'react';
 export default function Level({ onClick }:any) {
   return (
     <div id="level">
-      <div style={{color: "lightgray", paddingBottom: 5}}>
+      <div style={{color: "palevioletred", paddingBottom: 5}}>
         Select Level:
       </div>
       <div id="buttons">
