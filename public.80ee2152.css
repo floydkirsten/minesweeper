@@ -1,5 +1,5 @@
 #counter {
-  background: gray;
+  background: dimgray;
   font-size: 20px;
   color: white;
   padding: 10px;
@@ -11,8 +11,16 @@
   margin-left: 15px;
 }
 
+#container {
+  background: white;
+}
+
+#board {
+  padding-left: 10px;
+}
+
 #timer {
-  background: gray;
+  background: dimgray;
   font-size: 20px;
   color: white;
   padding: 10px;
@@ -26,8 +34,9 @@
 
 #menu {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 5px;
 }
 
 .cell {
@@ -50,11 +59,24 @@
   vertical-align: top;
 }
 
+img {
+  width: 25px;
+  height: 20px;
+  align-items: center;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 5px;
+}
+
 body {
-  background: black;
+  background: url(/tropical.64abc8b2.jpg);
   align-items: center;
   float: none;
   display: flex;
+  align-items: center;
+  overflow-x: auto;
   justify-content: center;
   padding-top: 20px;
 }
@@ -67,10 +89,11 @@ body {
 
 button {
   transition-duration: 0.4s;
+  background-color: mistyrose;
 }
 
 button:hover {
-  background-color: lightslategray;
+  background-color: darksalmon;
   /* Green */
   color: white;
 }
@@ -80,6 +103,7 @@ button:hover {
   width: 100%;
   text-align: center;
   font-size: 50px;
+  padding-right: 20px;
   font-family: "Arial Black", serif;
 }
 
@@ -92,6 +116,7 @@ button:hover {
   font-size: 10px;
   font-family: "Arial", Gadget, sans-serif;
   padding-bottom: 20px;
+  padding-top: 10px;
 }
 
 a {
@@ -103,16 +128,18 @@ a:hover {
 }
 
 #rules {
-  color: white;
+  color: maroon;
   width: 100%;
   text-align: center;
-  font-size: 20px;
+  font-size: 15px;
   font-family: "Arial", Gadget, sans-serif;
-  padding-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 15px;
 }
 
 #buttons {
   display: block;
+  padding-right: 20px;
 }
 
 /*# sourceMappingURL=/public.80ee2152.css.map */

@@ -47512,7 +47512,8 @@ function Button(_a) {
     onClick: onClick,
     style: {
       width: 60,
-      fontSize: 15
+      fontSize: 15,
+      height: 50
     }
   }, " reset ");
 }
@@ -47563,7 +47564,7 @@ function Level(_a) {
     id: "level"
   }, react_1.default.createElement("div", {
     style: {
-      color: "lightgray",
+      color: "palevioletred",
       paddingBottom: 5
     }
   }, "Select Level:"), react_1.default.createElement("div", {
@@ -47653,7 +47654,9 @@ function Row(props) {
 }
 
 exports.default = Row;
-},{"react":"../node_modules/react/index.js","./Cell":"../src/components/Cell.tsx"}],"../src/components/Rules.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Cell":"../src/components/Cell.tsx"}],"../src/images/github.png":[function(require,module,exports) {
+module.exports = "/github.775a2fd6.png";
+},{}],"../src/components/Rules.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -47671,11 +47674,17 @@ var react_1 = __importDefault(require("react"));
 function Rules() {
   return react_1.default.createElement("div", null, react_1.default.createElement("div", {
     id: "rules"
-  }, "to set flags: hold down shift and click"));
+  }, "to set flags: hold down shift and click"), react_1.default.createElement("div", {
+    id: "link"
+  }, react_1.default.createElement("a", {
+    href: "https://github.com/floydkirsten"
+  }, react_1.default.createElement("img", {
+    src: require('../images/github.png')
+  }), "github.com/floydkirsten")));
 }
 
 exports.default = Rules;
-},{"react":"../node_modules/react/index.js"}],"../src/components/Timer.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../images/github.png":"../src/images/github.png"}],"../src/components/Timer.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -47694,7 +47703,7 @@ function Timer(_a) {
   var time = _a.time;
   return react_1.default.createElement("div", {
     id: "timer"
-  }, react_1.default.createElement("div", null, " ", time, " "));
+  }, react_1.default.createElement("div", null, " :", time, " "));
 }
 
 exports.default = Timer;
@@ -47716,11 +47725,7 @@ var react_1 = __importDefault(require("react"));
 function Title() {
   return react_1.default.createElement("div", null, react_1.default.createElement("div", {
     id: "title"
-  }, " MINESWEEPER "), react_1.default.createElement("div", {
-    id: "link"
-  }, react_1.default.createElement("a", {
-    href: "https://github.com/floydkirsten"
-  }, " github.com/floydkirsten ")));
+  }, " MINESWEEPER "));
 }
 
 exports.default = Title;
@@ -48032,7 +48037,7 @@ function Game() {
         cell.opened = true;
 
         if (cell.bomb === true) {
-          cell.value = '😵';
+          cell.value = '😔';
         } else if (cell.adjacentBombs === 0) {
           cell.value = '';
         } else {
@@ -48086,7 +48091,7 @@ function Game() {
           return cell;
         } else {
           setBombsLeft(bombsLeft - 1);
-          cell.value = '❕';
+          cell.value = '🌸';
           cell.flagged = true;
         }
 
@@ -48145,7 +48150,9 @@ function Game() {
     flags: bombsLeft
   }), react_1.default.createElement(LevelSelect_1.default, {
     onClick: setDifficulty
-  })), react_1.default.createElement("br", null), grid && grid.map(function (row, index) {
+  })), react_1.default.createElement("br", null), react_1.default.createElement("div", {
+    id: "board"
+  }, grid && grid.map(function (row, index) {
     return react_1.default.createElement("div", {
       className: "row"
     }, react_1.default.createElement(Row_1.default, {
@@ -48153,7 +48160,7 @@ function Game() {
       rowIndex: index,
       detectShift: detectShift
     }));
-  }), react_1.default.createElement(Rules_1.default, null));
+  })), react_1.default.createElement(Rules_1.default, null));
 }
 
 exports.default = Game;
@@ -48209,7 +48216,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64506" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51690" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
