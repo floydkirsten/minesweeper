@@ -62,7 +62,6 @@ export default function Game() {
   }
 
   function handleClick(rowIndex: number, cellIndex: number) {
-    console.log(clicks);
     if (clicks===1) {
       setTimerActive(true);
     }
@@ -153,7 +152,6 @@ export default function Game() {
         ))
       }
       </div>
-      <Rules />
     </div>
   );
 }
