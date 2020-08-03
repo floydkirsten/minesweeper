@@ -47654,37 +47654,7 @@ function Row(props) {
 }
 
 exports.default = Row;
-},{"react":"../node_modules/react/index.js","./Cell":"../src/components/Cell.tsx"}],"../src/images/github.png":[function(require,module,exports) {
-module.exports = "/github.775a2fd6.png";
-},{}],"../src/components/Rules.tsx":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var react_1 = __importDefault(require("react"));
-
-function Rules() {
-  return react_1.default.createElement("div", null, react_1.default.createElement("div", {
-    id: "rules"
-  }, "to set flags: hold down shift and click"), react_1.default.createElement("div", {
-    id: "link"
-  }, react_1.default.createElement("a", {
-    href: "https://github.com/floydkirsten"
-  }, react_1.default.createElement("img", {
-    src: require('../images/github.png')
-  }), "github.com/floydkirsten")));
-}
-
-exports.default = Rules;
-},{"react":"../node_modules/react/index.js","../images/github.png":"../src/images/github.png"}],"../src/components/Timer.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Cell":"../src/components/Cell.tsx"}],"../src/components/Timer.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -47701,9 +47671,29 @@ var react_1 = __importDefault(require("react"));
 
 function Timer(_a) {
   var time = _a.time;
+
+  function getTime(time) {
+    if (time < 60) {
+      if (time < 10) {
+        return ':' + 0 + time;
+      }
+
+      return ':' + time;
+    } else {
+      var minutes = Math.floor(time / 60);
+      var seconds = time % 60;
+
+      if (seconds < 10) {
+        return minutes + ':' + 0 + seconds;
+      }
+
+      return minutes + ':' + seconds;
+    }
+  }
+
   return react_1.default.createElement("div", {
     id: "timer"
-  }, react_1.default.createElement("div", null, " :", time, " "));
+  }, react_1.default.createElement("div", null, " ", getTime(time), " "));
 }
 
 exports.default = Timer;
@@ -47966,8 +47956,6 @@ var LevelSelect_1 = __importDefault(require("../components/LevelSelect"));
 
 var Row_1 = __importDefault(require("../components/Row"));
 
-var Rules_1 = __importDefault(require("../components/Rules"));
-
 var Timer_1 = __importDefault(require("../components/Timer"));
 
 var Title_1 = __importDefault(require("../components/Title"));
@@ -48058,8 +48046,6 @@ function Game() {
   }
 
   function handleClick(rowIndex, cellIndex) {
-    console.log(clicks);
-
     if (clicks === 1) {
       setTimerActive(true);
     }
@@ -48160,11 +48146,11 @@ function Game() {
       rowIndex: index,
       detectShift: detectShift
     }));
-  })), react_1.default.createElement(Rules_1.default, null));
+  })));
 }
 
 exports.default = Game;
-},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","../components/Button":"../src/components/Button.tsx","../components/Counter":"../src/components/Counter.tsx","../components/LevelSelect":"../src/components/LevelSelect.tsx","../components/Row":"../src/components/Row.tsx","../components/Rules":"../src/components/Rules.tsx","../components/Timer":"../src/components/Timer.tsx","../components/Title":"../src/components/Title.tsx","../utils/minesweeper":"../src/utils/minesweeper.ts"}],"../src/index.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","../components/Button":"../src/components/Button.tsx","../components/Counter":"../src/components/Counter.tsx","../components/LevelSelect":"../src/components/LevelSelect.tsx","../components/Row":"../src/components/Row.tsx","../components/Timer":"../src/components/Timer.tsx","../components/Title":"../src/components/Title.tsx","../utils/minesweeper":"../src/utils/minesweeper.ts"}],"../src/index.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -48216,7 +48202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51690" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53453" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
