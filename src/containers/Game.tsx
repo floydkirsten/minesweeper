@@ -151,6 +151,7 @@ export default function Game() {
           </div>
         ))
       }
+      <Rules />
       </div>
     </div>
   );

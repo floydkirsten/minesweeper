@@ -1,5 +1,4 @@
 import React from 'react';
-import { createSecureServer } from 'http2';
 
 export default function Timer({time}) {
     function getTime(time) {
