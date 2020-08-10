@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default function Timer({time}) {
-    function getTime(time) {
+export default function Timer({time}: any) {
+    function getTime(time: number) {
         if (time < 60) {
             if (time<10) {
                 return ':' + 0 + time;

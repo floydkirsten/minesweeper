@@ -8,7 +8,8 @@
     "lint": "eslint",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build",
-    "build": "cross-env NODE_ENV=production parcel build public/index.html --public-url ."
+    "build": "cross-env NODE_ENV=production parcel build public/index.html --public-url .",
+    "test": "jest"
   },
   "keywords": [],
   "homepage": "http://floydkirsten.github.io/minesweeper",
@@ -32,13 +33,26 @@
     "typescript": "^3.9.6"
   },
   "dependencies": {
+    "@types/jest": "^26.0.9",
     "@types/lodash": "^4.14.158",
     "@types/node": "^14.0.27",
     "chance": "^1.1.6",
     "components": "^0.1.0",
     "cross-env": "^7.0.2",
+    "jest": "^26.2.2",
     "lodash": "^4.17.19",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "ts-jest": "^26.1.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
   }
 }

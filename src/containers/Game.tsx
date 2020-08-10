@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 import { find } from 'lodash';
 
-
 import Button from '../components/Button';
 import Counter from '../components/Counter';
 import LevelSelect from '../components/LevelSelect';
@@ -28,7 +27,7 @@ export default function Game() {
   const [timerActive, setTimerActive] = useState(false);
 
   function startGame() {
-    const { size, bombCount } = find(difficultyValues, ['difficulty', difficulty]);
+    const { size, bombCount }: any = find(difficultyValues, ['difficulty', difficulty]);
     setGridSize(size);
     setBombsLeft(bombCount);
     setBombsNumber(bombCount);
@@ -40,7 +39,7 @@ export default function Game() {
   }
 
   function exposeGrid() {
-    const newGrid = grid.map((row) => row.map((cell) => {
+    const newGrid = grid.map((row: any[]) => row.map((cell) => {
       cell.opened = true;
       if (cell.bomb === true) {
         cell.value = '😔';
@@ -80,9 +79,9 @@ export default function Game() {
   }
   
   function flagCell(rowIndex: number, cellIndex: number) {
-     const newGrid = grid.map((row, index) => {
+     const newGrid = grid.map((row: any[], index: number) => {
        if (index !== rowIndex) return row;
-       return row.map((cell, index) => {
+       return row.map((cell: { opened: boolean; flagged: boolean; value: string; }, index: number) => {
          if (index !== cellIndex) return cell;
 
          if (cell.opened===true) return cell;
@@ -109,7 +108,7 @@ export default function Game() {
   }
 
   useEffect(() => {
-    let interval = null;
+    let interval: any = null;
     if(timerActive) {
       interval = setInterval(() => {
         setTime(time => time + 1);
@@ -120,7 +119,7 @@ export default function Game() {
     return () => clearInterval(interval);
   }, [timerActive, time]);
 
-  function detectShift(rowIndex, cellIndex, e) { 
+  function detectShift(rowIndex: number, cellIndex: number, e: { shiftKey: any; preventDefault: () => void; }) { 
     if (active === false) return;
     if (e.shiftKey) {
       e.preventDefault();
@@ -155,4 +154,8 @@ export default function Game() {
       </div>
     </div>
   );
+}
+
+export function addAB(a: number, b: number) {
+  return a + b;
 }

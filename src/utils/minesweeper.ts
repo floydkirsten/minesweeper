@@ -22,7 +22,7 @@ function makeInitGrid(gridSize: number) {
   return initGrid;
 }
 
-function checkAdjacentCells(grid, row: number, cell: number): number {
+function checkAdjacentCells(grid: any, row: number, cell: number): number {
   let bombCount = 0;
 
   if (grid[row][cell].bomb === true) return -1;
@@ -55,7 +55,7 @@ function checkAdjacentCells(grid, row: number, cell: number): number {
   return bombCount;
 }
 
-function placeBombsOnGrid(grid, bombsLeft: number) {
+function placeBombsOnGrid(grid: string | any[], bombsLeft: number) {
   const gridClone = cloneDeep(grid);
   const size = grid.length;
 
@@ -82,7 +82,7 @@ function prepareGrid(size: number, bombCount: number) {
   return preparedGrid;
 }
 
-function calcAdjacentBombValues(grid) {
+function calcAdjacentBombValues(grid: string | any[]) {
   const gridClone = cloneDeep(grid);
 
   for (let row = 0; row < grid.length; row += 1) {
@@ -94,14 +94,14 @@ function calcAdjacentBombValues(grid) {
   return gridClone;
 }
 
-function calcOpenCell(rowIndex: number, cellIndex: number, grid, loop) {
-  if (grid[rowIndex][cellIndex].bomb===true && !loop) gameOver();
+function calcOpenCell(rowIndex: number, cellIndex: number, grid: any[], loop: boolean) {
+  //if (grid[rowIndex][cellIndex].bomb===true && !loop) gameOver();
     if (grid[rowIndex][cellIndex].opened===true) return;
 
     else {
-      const newGrid = grid.map((row, index) => {
+      const newGrid = grid.map((row: any[], index: number) => {
         if (index !== rowIndex) return row;
-        return row.map((cell, index) => {
+        return row.map((cell: { bomb: boolean; adjacentBombs: number; opened: boolean; value: any; }, index: number) => {
           if (index !== cellIndex) return cell;
           if (cell.bomb===true) return cell;
 
@@ -127,10 +127,10 @@ function calcOpenCell(rowIndex: number, cellIndex: number, grid, loop) {
 }
 }
 
-function checkIfGameOver(grid) {
+function checkIfGameOver(grid: any[]) {
   let over = true;
-  grid.map((row, index) => {
-    row.map((cell, index) => {
+  grid.map((row: any, index: any) => {
+    row.map((cell: { flagged: boolean; opened: boolean; }, index: any) => {
       if (cell.flagged===false && cell.opened===false) over = false;  
     });
   });
@@ -155,5 +155,9 @@ export default {
   calcOpenCell,
   difficultyValues,
   prepareGrid,
-  checkIfGameOver
+  checkIfGameOver,
+  checkAdjacentCells,
+  makeInitGrid,
+  placeBombsOnGrid,
+  calcAdjacentBombValues
 };
