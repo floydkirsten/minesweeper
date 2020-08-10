@@ -33,7 +33,9 @@ test('should return the adjacent cell bomb count', () => {
 	];
 
 	const output = 2;
+	const bombOutput = -1;
 	expect(minesweeper.checkAdjacentCells(input, 1, 2)).toBe(output);
+	expect(minesweeper.checkAdjacentCells(input, 2, 1)).toBe(bombOutput);
 })
 
 
@@ -115,7 +117,7 @@ test('should handle click on board appropiately', () => {
 			{flagged:false, opened:false, bomb: false, adjacentBombs:1, value: ''}
 		],
 		[
-			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''},
+			{flagged:false, opened:true, bomb: false, adjacentBombs:0, value: ''},
 			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''},
 			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''}
 		]
@@ -126,28 +128,29 @@ test('should handle click on board appropiately', () => {
 
 	const output = [
 		[
-			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''},
+			{flagged:false, opened:true, bomb: false, adjacentBombs:1, value: '1'},
 			{flagged:false, opened:false, bomb: true, adjacentBombs:0, value: ''},
-			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''}
+			{flagged:false, opened:false, bomb: false, adjacentBombs:1, value: ''}
 		],
 		[
-			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''},
-			{flagged:false, opened:false, bomb: true, adjacentBombs:0, value: ''},
-			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''}
+			{flagged:false, opened:false, bomb: false, adjacentBombs:1, value: ''},
+			{flagged:false, opened:false, bomb: false, adjacentBombs:1, value: ''},
+			{flagged:false, opened:false, bomb: false, adjacentBombs:1, value: ''}
 		],
 		[
-			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''},
+			{flagged:false, opened:true, bomb: false, adjacentBombs:0, value: ''},
 			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''},
 			{flagged:false, opened:false, bomb: false, adjacentBombs:0, value: ''}
 		]
 	];
-	expect(minesweeper.calcOpenCell(row, cell, input, false))
+	expect(minesweeper.calcOpenCell(row, cell, input, false)).toEqual(output);
+	//expect()
 })
 
 
 //checkIfGameOver
 test('should return true if game is over', () => {
-	const input = [
+	const input1 = [
 		[
 			{flagged:false, opened:false},
 			{flagged:false, opened:false},
@@ -164,6 +167,24 @@ test('should return true if game is over', () => {
 			{flagged:false, opened:false}
 		]
 	];
-	const output = false;
-	expect(minesweeper.checkIfGameOver(input)).toEqual(output);
+
+	const input2 = [
+		[
+			{flagged:true, opened:false},
+			{flagged:false, opened:true},
+			{flagged:true, opened:false}
+		],
+		[
+			{flagged:false, opened:true},
+			{flagged:true, opened:false},
+			{flagged:false, opened:true}
+		],
+		[
+			{flagged:false, opened:true},
+			{flagged:false, opened:true},
+			{flagged:true, opened:false}
+		]
+	]
+	expect(minesweeper.checkIfGameOver(input1)).toEqual(false);
+	expect(minesweeper.checkIfGameOver(input2)).toEqual(true);
 })
