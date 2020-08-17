@@ -8,6 +8,7 @@ import Counter from '../components/Counter';
 import LevelSelect from '../components/LevelSelect';
 import Row from '../components/Row';
 import Rules from '../components/Rules';
+import ThemeButton from "../components/ThemeButton";
 import Timer from '../components/Timer';
 import Title from '../components/Title';
 
@@ -25,6 +26,7 @@ export default function Game() {
   const [time, setTime] = useState(0);
   const [clicks, setClicks] = useState(1);
   const [timerActive, setTimerActive] = useState(false);
+  const [theme, setTheme] = useState("pink");
 
   function startGame() {
     const { size, bombCount }: any = find(difficultyValues, ['difficulty', difficulty]);
@@ -130,16 +132,25 @@ export default function Game() {
     }
   }
 
+  function switchTheme() {
+    if (theme==="pink") {
+      setTheme("dark");
+    } else {
+      setTheme("pink");
+    }
+  }
+
   useEffect(startGame, [difficulty]);
 
   return (
-    <div id="container">
-      <Title />
+    <div id={theme==="pink"?'pinkContainer':'darkContainer'}>
+      <Title theme={theme}/>
       <div id="menu">
         <Timer time={time} />
         <Button onClick={startGame} />
         <Counter flags={bombsLeft} />
         <LevelSelect onClick={setDifficulty} />
+        <ThemeButton onClick={switchTheme} />
       </div>
       <br />
       <div id="board">
@@ -150,8 +161,8 @@ export default function Game() {
           </div>
         ))
       }
-      <Rules />
       </div>
+      <Rules />
     </div>
   );
 }

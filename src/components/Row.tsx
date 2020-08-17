@@ -3,9 +3,9 @@ import React from 'react';
 
 import Cell from './Cell';
 
-export default function Row(props: { row: any; rowIndex: any; detectShift: any; }) {
+export default function Row(props: {row: any, rowIndex: any, detectShift: any}) {
   return (
-    props.row.map((cell: { value: any; opened: any; adjacentBombs: any; }, index: number) => (
+    props.row.map((cell: { value: any; opened: any; adjacentBombs: any;}, index: number) => (
       <Cell
         rowIndex={props.rowIndex}
         cellIndex={index}
