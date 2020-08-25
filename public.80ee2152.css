@@ -11,16 +11,14 @@
   margin-left: 15px;
 }
 
-#container {
-  background: white;
-}
-
 #board {
-  padding-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #timer {
-  background: dimgray;
+  background: #eba0a0;
   font-size: 20px;
   color: white;
   padding: 10px;
@@ -95,16 +93,7 @@ button {
 button:hover {
   background-color: darksalmon;
   /* Green */
-  color: white;
-}
-
-#title {
-  color: rosybrown;
-  width: 100%;
-  text-align: center;
-  font-size: 50px;
-  padding-right: 20px;
-  font-family: "Arial Black", serif;
+  color: darkgray;
 }
 
 #link {
@@ -139,7 +128,6 @@ a:hover {
 
 #buttons {
   display: block;
-  padding-right: 20px;
 }
 
 /*# sourceMappingURL=/public.80ee2152.css.map */

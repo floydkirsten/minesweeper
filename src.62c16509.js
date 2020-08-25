@@ -47507,13 +47507,15 @@ Object.defineProperty(exports, "__esModule", {
 var react_1 = __importDefault(require("react"));
 
 function Button(_a) {
-  var onClick = _a.onClick;
+  var onClick = _a.onClick,
+      theme = _a.theme;
   return react_1.default.createElement("button", {
     onClick: onClick,
     style: {
       width: 60,
       fontSize: 15,
-      height: 50
+      height: 50,
+      backgroundColor: theme === "pink" ? 'mistyrose' : 'white'
     }
   }, " reset ");
 }
@@ -47538,7 +47540,7 @@ function Button(_a) {
   var flags = _a.flags;
   return react_1.default.createElement("div", {
     id: "counter"
-  }, " ", flags, " ");
+  }, flags);
 }
 
 exports.default = Button;
@@ -47559,25 +47561,35 @@ Object.defineProperty(exports, "__esModule", {
 var react_1 = __importDefault(require("react"));
 
 function Level(_a) {
-  var _onClick = _a.onClick;
+  var _onClick = _a.onClick,
+      theme = _a.theme;
   return react_1.default.createElement("div", {
     id: "level"
   }, react_1.default.createElement("div", {
     style: {
-      color: "palevioletred",
+      color: theme === 'pink' ? "palevioletred" : 'white',
       paddingBottom: 5
     }
   }, "Select Level:"), react_1.default.createElement("div", {
     id: "buttons"
   }, react_1.default.createElement("button", {
+    style: {
+      backgroundColor: theme === "pink" ? 'mistyrose' : 'white'
+    },
     onClick: function onClick() {
       return _onClick(1);
     }
   }, " easy "), react_1.default.createElement("button", {
+    style: {
+      backgroundColor: theme === "pink" ? 'mistyrose' : 'white'
+    },
     onClick: function onClick() {
       return _onClick(2);
     }
   }, " medium "), react_1.default.createElement("button", {
+    style: {
+      backgroundColor: theme === "pink" ? 'mistyrose' : 'white'
+    },
     onClick: function onClick() {
       return _onClick(3);
     }
@@ -47601,6 +47613,7 @@ Object.defineProperty(exports, "__esModule", {
 var react_1 = __importDefault(require("react"));
 
 var colors = ["black", "palevioletred", "red", "purple", "tan", "darkorchid", "turquoise", "black", "gray"];
+var colors2 = ["black", "blue", "green", "red", "purple", "black", "maroon", "gray", "turquoise"];
 
 function Cell(_a) {
   var rowIndex = _a.rowIndex,
@@ -47608,7 +47621,8 @@ function Cell(_a) {
       detectShift = _a.detectShift,
       value = _a.value,
       opened = _a.opened,
-      adjacentBombs = _a.adjacentBombs;
+      adjacentBombs = _a.adjacentBombs,
+      theme = _a.theme;
   return react_1.default.createElement("div", {
     className: 'cell',
     onClick: function onClick() {
@@ -47616,7 +47630,7 @@ function Cell(_a) {
     },
     style: {
       background: opened ? 'whitesmoke' : 'darkgray',
-      color: colors[adjacentBombs]
+      color: theme === "pink" ? colors[adjacentBombs] : colors2[adjacentBombs]
     }
   }, value);
 }
@@ -47648,7 +47662,8 @@ function Row(props) {
       detectShift: props.detectShift,
       value: cell.value,
       opened: cell.opened,
-      adjacentBombs: cell.adjacentBombs
+      adjacentBombs: cell.adjacentBombs,
+      theme: props.theme
     });
   });
 }
@@ -47671,12 +47686,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var react_1 = __importDefault(require("react"));
 
-function Rules() {
+function Rules(_a) {
+  var theme = _a.theme;
   return react_1.default.createElement("div", null, react_1.default.createElement("div", {
-    id: "rules"
+    id: "rules",
+    style: {
+      color: theme === 'pink' ? 'maroon' : 'lightgray'
+    }
   }, "to set flags: hold down shift and click"), react_1.default.createElement("div", {
     id: "link"
   }, react_1.default.createElement("a", {
+    style: {
+      color: theme === 'pink' ? 'plum' : 'white'
+    },
     href: "https://github.com/floydkirsten"
   }, react_1.default.createElement("img", {
     src: require('../images/github.png')
@@ -47684,7 +47706,40 @@ function Rules() {
 }
 
 exports.default = Rules;
-},{"react":"../node_modules/react/index.js","../images/github.png":"../src/images/github.png"}],"../src/components/Timer.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../images/github.png":"../src/images/github.png"}],"../src/components/ThemeButton.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importDefault(require("react"));
+
+function ThemeButton(_a) {
+  var onClick = _a.onClick,
+      theme = _a.theme;
+  return react_1.default.createElement("button", {
+    onClick: onClick,
+    style: {
+      width: 90,
+      fontSize: 10,
+      height: 20,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme === "pink" ? 'mistyrose' : 'white'
+    }
+  }, " change theme ");
+}
+
+exports.default = ThemeButton;
+},{"react":"../node_modules/react/index.js"}],"../src/components/Timer.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -47700,7 +47755,8 @@ Object.defineProperty(exports, "__esModule", {
 var react_1 = __importDefault(require("react"));
 
 function Timer(_a) {
-  var time = _a.time;
+  var time = _a.time,
+      theme = _a.theme;
 
   function getTime(time) {
     if (time < 60) {
@@ -47722,7 +47778,10 @@ function Timer(_a) {
   }
 
   return react_1.default.createElement("div", {
-    id: "timer"
+    id: "timer",
+    style: {
+      background: theme === 'pink' ? 'rgb(235, 160, 160)' : 'dimgray'
+    }
   }, react_1.default.createElement("div", null, " ", getTime(time), " "));
 }
 
@@ -47742,9 +47801,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var react_1 = __importDefault(require("react"));
 
-function Title() {
+function Title(_a) {
+  var theme = _a.theme;
   return react_1.default.createElement("div", null, react_1.default.createElement("div", {
-    id: "title"
+    style: {
+      width: '100%',
+      textAlign: 'center',
+      fontSize: '50px',
+      paddingRight: '20px',
+      fontFamily: 'Arial Black, serif',
+      color: theme === "pink" ? 'pink' : 'white'
+    }
   }, " MINESWEEPER "));
 }
 
@@ -47860,7 +47927,7 @@ function calcAdjacentBombValues(grid) {
 }
 
 function calcOpenCell(rowIndex, cellIndex, grid, loop) {
-  if (grid[rowIndex][cellIndex].bomb === true && !loop) gameOver();
+  //if (grid[rowIndex][cellIndex].bomb===true && !loop) gameOver();
   if (grid[rowIndex][cellIndex].opened === true) return;else {
     var newGrid = grid.map(function (row, index) {
       if (index !== rowIndex) return row;
@@ -47924,7 +47991,11 @@ exports.default = {
   calcOpenCell: calcOpenCell,
   difficultyValues: difficultyValues,
   prepareGrid: prepareGrid,
-  checkIfGameOver: checkIfGameOver
+  checkIfGameOver: checkIfGameOver,
+  checkAdjacentCells: checkAdjacentCells,
+  makeInitGrid: makeInitGrid,
+  placeBombsOnGrid: placeBombsOnGrid,
+  calcAdjacentBombValues: calcAdjacentBombValues
 };
 },{"lodash":"../node_modules/lodash/lodash.js"}],"../src/containers/Game.tsx":[function(require,module,exports) {
 "use strict";
@@ -47972,6 +48043,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.addAB = void 0;
 /* eslint-disable react/jsx-filename-extension */
 
 var react_1 = __importStar(require("react"));
@@ -47987,6 +48059,8 @@ var LevelSelect_1 = __importDefault(require("../components/LevelSelect"));
 var Row_1 = __importDefault(require("../components/Row"));
 
 var Rules_1 = __importDefault(require("../components/Rules"));
+
+var ThemeButton_1 = __importDefault(require("../components/ThemeButton"));
 
 var Timer_1 = __importDefault(require("../components/Timer"));
 
@@ -48035,6 +48109,10 @@ function Game() {
   var _j = react_1.useState(false),
       timerActive = _j[0],
       setTimerActive = _j[1];
+
+  var _k = react_1.useState("pink"),
+      theme = _k[0],
+      setTheme = _k[1];
 
   function startGame() {
     var _a = lodash_1.find(difficultyValues, ['difficulty', difficulty]),
@@ -48109,7 +48187,7 @@ function Game() {
           return cell;
         } else {
           setBombsLeft(bombsLeft - 1);
-          cell.value = '🌸';
+          cell.value = theme === 'pink' ? '🌸' : '🚩';
           cell.flagged = true;
         }
 
@@ -48155,19 +48233,35 @@ function Game() {
     }
   }
 
+  function switchTheme() {
+    if (theme === "pink") {
+      setTheme("dark");
+    } else {
+      setTheme("pink");
+    }
+  }
+
   react_1.useEffect(startGame, [difficulty]);
   return react_1.default.createElement("div", {
-    id: "container"
-  }, react_1.default.createElement(Title_1.default, null), react_1.default.createElement("div", {
+    style: {
+      background: theme === 'pink' ? 'white' : 'black',
+      width: '500px'
+    }
+  }, react_1.default.createElement(Title_1.default, {
+    theme: theme
+  }), react_1.default.createElement("div", {
     id: "menu"
   }, react_1.default.createElement(Timer_1.default, {
-    time: time
+    time: time,
+    theme: theme
   }), react_1.default.createElement(Button_1.default, {
-    onClick: startGame
+    onClick: startGame,
+    theme: theme
   }), react_1.default.createElement(Counter_1.default, {
     flags: bombsLeft
   }), react_1.default.createElement(LevelSelect_1.default, {
-    onClick: setDifficulty
+    onClick: setDifficulty,
+    theme: theme
   })), react_1.default.createElement("br", null), react_1.default.createElement("div", {
     id: "board"
   }, grid && grid.map(function (row, index) {
@@ -48176,13 +48270,25 @@ function Game() {
     }, react_1.default.createElement(Row_1.default, {
       row: row,
       rowIndex: index,
-      detectShift: detectShift
+      detectShift: detectShift,
+      theme: theme
     }));
-  }), react_1.default.createElement(Rules_1.default, null)));
+  })), react_1.default.createElement(Rules_1.default, {
+    theme: theme
+  }), react_1.default.createElement(ThemeButton_1.default, {
+    onClick: switchTheme,
+    theme: theme
+  }));
 }
 
 exports.default = Game;
-},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","../components/Button":"../src/components/Button.tsx","../components/Counter":"../src/components/Counter.tsx","../components/LevelSelect":"../src/components/LevelSelect.tsx","../components/Row":"../src/components/Row.tsx","../components/Rules":"../src/components/Rules.tsx","../components/Timer":"../src/components/Timer.tsx","../components/Title":"../src/components/Title.tsx","../utils/minesweeper":"../src/utils/minesweeper.ts"}],"../src/index.tsx":[function(require,module,exports) {
+
+function addAB(a, b) {
+  return a + b;
+}
+
+exports.addAB = addAB;
+},{"react":"../node_modules/react/index.js","lodash":"../node_modules/lodash/lodash.js","../components/Button":"../src/components/Button.tsx","../components/Counter":"../src/components/Counter.tsx","../components/LevelSelect":"../src/components/LevelSelect.tsx","../components/Row":"../src/components/Row.tsx","../components/Rules":"../src/components/Rules.tsx","../components/ThemeButton":"../src/components/ThemeButton.tsx","../components/Timer":"../src/components/Timer.tsx","../components/Title":"../src/components/Title.tsx","../utils/minesweeper":"../src/utils/minesweeper.ts"}],"../src/index.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -48234,7 +48340,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54452" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55570" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
