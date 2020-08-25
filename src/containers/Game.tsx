@@ -143,7 +143,7 @@ export default function Game() {
   useEffect(startGame, [difficulty]);
 
   return (
-    <div style={{background: theme==='pink'? 'white':'black', width: '500px'}} >
+    <div style={{background: theme==='pink'? 'white':'black', padding: '10px'}} >
       <Title theme={theme}/>
       <div id="menu">
         <Timer time={time} theme={theme}/>
