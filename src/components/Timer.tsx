@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Timer({time}: any) {
+export default function Timer({time, theme}: any) {
     function getTime(time: number) {
         if (time < 60) {
             if (time<10) {
@@ -17,7 +17,7 @@ export default function Timer({time}: any) {
         }
     }
     return (
-        <div id="timer"> 
+        <div id="timer" style={{background: theme==='pink'?'rgb(235, 160, 160)': 'dimgray'}}> 
             <div> {getTime(time)} </div>
         </div>
     )

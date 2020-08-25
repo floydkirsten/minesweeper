@@ -3,7 +3,7 @@ import React from 'react';
 
 import Cell from './Cell';
 
-export default function Row(props: {row: any, rowIndex: any, detectShift: any}) {
+export default function Row(props: {row: any, rowIndex: any, detectShift: any, theme: any}) {
   return (
     props.row.map((cell: { value: any; opened: any; adjacentBombs: any;}, index: number) => (
       <Cell
@@ -13,6 +13,7 @@ export default function Row(props: {row: any, rowIndex: any, detectShift: any}) 
         value={cell.value}
         opened={cell.opened}
         adjacentBombs={cell.adjacentBombs}
+        theme={props.theme}
       />
     ))
   );

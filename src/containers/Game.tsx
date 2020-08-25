@@ -95,7 +95,7 @@ export default function Game() {
            return cell;
          } else {
            setBombsLeft(bombsLeft - 1);
-           cell.value = '🌸';
+           cell.value = theme==='pink'? '🌸':'🚩';
            cell.flagged = true;
         }
          return cell;
@@ -143,26 +143,26 @@ export default function Game() {
   useEffect(startGame, [difficulty]);
 
   return (
-    <div id={theme==="pink"?'pinkContainer':'darkContainer'}>
+    <div style={{background: theme==='pink'? 'white':'black', width: '500px'}} >
       <Title theme={theme}/>
       <div id="menu">
-        <Timer time={time} />
-        <Button onClick={startGame} />
+        <Timer time={time} theme={theme}/>
+        <Button onClick={startGame} theme={theme} />
         <Counter flags={bombsLeft} />
-        <LevelSelect onClick={setDifficulty} />
-        <ThemeButton onClick={switchTheme} />
+        <LevelSelect onClick={setDifficulty} theme={theme} />
       </div>
       <br />
       <div id="board">
       {
         grid && grid.map((row:number, index:number) => (
           <div className="row">
-            <Row row={row} rowIndex={index} detectShift={detectShift} />
+            <Row row={row} rowIndex={index} detectShift={detectShift} theme={theme} />
           </div>
         ))
       }
       </div>
-      <Rules />
+      <Rules theme={theme}/>
+      <ThemeButton onClick={switchTheme} theme={theme} />
     </div>
   );
 }

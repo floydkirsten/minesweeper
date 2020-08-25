@@ -1,7 +1,16 @@
 import React from 'react';
 
-export default function ThemeButton({onClick}: any) {
+export default function ThemeButton({onClick, theme}: any) {
     return (
-        <button onClick={onClick} style={{width: 80, fontSize: 15, height: 50}}> change theme </button>
+        <button onClick={onClick} 
+        style={{
+            width: 90, 
+            fontSize: 10, 
+            height: 20,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: theme==="pink"?'mistyrose':'white'
+        }}> change theme </button>
     )
 }

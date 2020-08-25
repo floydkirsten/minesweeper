@@ -11,20 +11,6 @@
     margin-left: 15px;
 }
 
-#pinkContainer {
-    background:white;
-    width: 500px;
-}
-
-#darkContainer {
-    background:black;
-    width: 500px;
-}
-#container {
-    background:white;
-    width: 500px;
-}
-
 #board {
     display: flex;
     justify-content: center;
@@ -107,25 +93,7 @@ button {
       
 button:hover {
     background-color: darksalmon; /* Green */
-    color: white;
-}
-
-#pinkTitle {
-    color: rosybrown;
-    width: 100%;
-    text-align: center;
-    font-size: 50px;
-    padding-right: 20px;
-    font-family:  'Arial Black', serif;
-}
-
-#darkTitle {
-    color: white;
-    width: 100%;
-    text-align: center;
-    font-size: 50px;
-    padding-right: 20px;
-    font-family:  'Arial Black', serif;
+    color: darkgray;
 }
 
 #link {
@@ -160,5 +128,4 @@ a:hover {
 
 #buttons {
     display: block;
-    padding-right: 20px;
 }
