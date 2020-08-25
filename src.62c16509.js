@@ -48245,7 +48245,7 @@ function Game() {
   return react_1.default.createElement("div", {
     style: {
       background: theme === 'pink' ? 'white' : 'black',
-      width: '500px'
+      padding: '10px'
     }
   }, react_1.default.createElement(Title_1.default, {
     theme: theme
@@ -48340,7 +48340,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55570" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55633" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
